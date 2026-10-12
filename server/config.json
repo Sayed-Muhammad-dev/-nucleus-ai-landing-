@@ -1,0 +1,152 @@
+{
+  "id": "nucleus",
+  "name": "Nucleus Knowledge",
+  "accent": "#b7a0ff",
+  "notice": "Knowledge retrieval searches documents you add and returns cited source passages. External AI models and third-party connectors are not configured.",
+  "collections": {
+    "plans": {
+      "label": "Plans",
+      "cms": true,
+      "fields": {
+        "name": {
+          "type": "text",
+          "optional": false
+        },
+        "price": {
+          "type": "text",
+          "optional": false
+        },
+        "cadence": {
+          "type": "text",
+          "optional": false
+        },
+        "blurb": {
+          "type": "text",
+          "optional": false
+        },
+        "cta": {
+          "type": "text",
+          "optional": false
+        },
+        "includes": {
+          "type": "array"
+        },
+        "featured": {
+          "type": "boolean",
+          "optional": true
+        }
+      }
+    },
+    "faqs": {
+      "label": "Faqs",
+      "cms": true,
+      "fields": {
+        "question": {
+          "type": "text",
+          "optional": false
+        },
+        "answer": {
+          "type": "text",
+          "optional": false
+        }
+      }
+    },
+    "brand": {
+      "label": "Brand",
+      "cms": true,
+      "fields": {
+        "name": {
+          "type": "text",
+          "optional": false
+        },
+        "product": {
+          "type": "text",
+          "optional": false
+        },
+        "tagline": {
+          "type": "text",
+          "optional": false
+        },
+        "subline": {
+          "type": "text",
+          "optional": false
+        },
+        "mission": {
+          "type": "text",
+          "optional": false
+        }
+      }
+    },
+    "documents": {
+      "label": "My documents",
+      "cms": false,
+      "fields": {
+        "title": {
+          "type": "text",
+          "optional": false
+        },
+        "text": {
+          "type": "text",
+          "maxLength": 180000
+        },
+        "ownerId": {
+          "type": "text",
+          "optional": true
+        }
+      },
+      "member": true,
+      "description": "Add text documents, policies or notes. Search returns source passages from your own records.",
+      "private": true
+    },
+    "inquiries": {
+      "label": "Contact inbox",
+      "cms": false,
+      "fields": {
+        "name": {
+          "type": "text",
+          "optional": false
+        },
+        "email": {
+          "type": "email"
+        },
+        "message": {
+          "type": "text",
+          "optional": false
+        },
+        "interest": {
+          "type": "text",
+          "optional": true
+        },
+        "status": {
+          "type": "text",
+          "options": [
+            "new",
+            "in-progress",
+            "resolved"
+          ],
+          "optional": true
+        }
+      },
+      "publicSubmit": true
+    },
+    "subscribers": {
+      "label": "Newsletter subscribers",
+      "cms": false,
+      "fields": {
+        "email": {
+          "type": "email"
+        },
+        "status": {
+          "type": "text",
+          "options": [
+            "new",
+            "active",
+            "unsubscribed"
+          ],
+          "optional": true
+        }
+      },
+      "publicSubmit": true
+    }
+  }
+}

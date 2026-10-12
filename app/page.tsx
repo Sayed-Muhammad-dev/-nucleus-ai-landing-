@@ -1,22 +1,40 @@
+import type { Faq } from "@/src/data/content";
+import { ContactRequest } from "@/src/components/contact-request";
+import { published } from "../server/public-data.mjs";
 import { ArrowRight, Check, Sparkles } from "lucide-react";
 import { DemoPanel } from "@/src/components/demo-panel";
 import { Reveal } from "@/src/components/reveal";
 import { FaqList } from "@/src/components/faq-list";
-import { brand, features, logos, plans, stats, steps } from "@/src/data/content";
+import {
+  brand as initialBrand,
+  features,
+  logos,
+  plans as initialPlans,
+  stats,
+  steps,
+} from "@/src/data/content";
 import { cn } from "@/src/lib/utils";
 
-export default function HomePage() {
+export const dynamic = "force-dynamic";
+export default async function HomePage() {
+  const brand =
+    (await published<typeof initialBrand>("brand"))[0] || initialBrand;
+  const plans = await published<(typeof initialPlans)[number]>("plans");
+  const faqs = await published<Faq>("faqs");
   return (
     <>
       {/* ------------------------------------------------------------ Hero */}
-      <section id="top" className="relative px-4 pb-20 pt-16 sm:px-6 sm:pt-24 lg:px-8 lg:pt-28">
+      <section
+        id="top"
+        className="relative px-4 pb-20 pt-16 sm:px-6 sm:pt-24 lg:px-8 lg:pt-28"
+      >
         <div className="mx-auto max-w-7xl">
           <div className="grid items-center gap-12 lg:grid-cols-[1.05fr,minmax(0,1fr)] lg:gap-14">
             <div>
               <Reveal>
                 <span className="ring-gradient inline-flex items-center gap-2 rounded-full bg-white/5 px-3.5 py-1.5 text-xs font-medium text-violet-200 backdrop-blur">
                   <Sparkles size={12} />
-                  Nucleus Reason 2.0 is now generally available
+                  Private documents. Checkable source passages.
                 </span>
               </Reveal>
 
@@ -38,11 +56,14 @@ export default function HomePage() {
               <Reveal delayMs={240}>
                 <div className="mt-9 flex flex-wrap gap-3">
                   <a
-                    href="#demo"
+                    href="/workspace"
                     className="group inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-electric-500 to-violet-600 px-6 py-3.5 font-semibold text-white shadow-glow transition duration-300 hover:-translate-y-0.5 hover:shadow-glow-lg"
                   >
                     See it work
-                    <ArrowRight size={16} className="transition group-hover:translate-x-1" />
+                    <ArrowRight
+                      size={16}
+                      className="transition group-hover:translate-x-1"
+                    />
                   </a>
                   <a
                     href="#how-it-works"
@@ -60,7 +81,9 @@ export default function HomePage() {
                       <dt className="text-2xl font-semibold text-white sm:text-3xl">
                         {stat.value}
                       </dt>
-                      <dd className="mt-1 text-xs text-slate-400">{stat.label}</dd>
+                      <dd className="mt-1 text-xs text-slate-400">
+                        {stat.label}
+                      </dd>
                     </div>
                   ))}
                 </dl>
@@ -77,7 +100,7 @@ export default function HomePage() {
       {/* --------------------------------------------------------- Logos */}
       <section className="border-y border-white/8 py-8">
         <p className="mb-6 text-center text-xs uppercase tracking-[0.22em] text-slate-500">
-          Trusted by operations teams at
+          Illustrative brands in the product demonstration
         </p>
         {/* Duplicated track so the marquee loops seamlessly at -50%. */}
         <div className="relative overflow-hidden [mask-image:linear-gradient(90deg,transparent,#000_12%,#000_88%,transparent)]">
@@ -95,7 +118,10 @@ export default function HomePage() {
       </section>
 
       {/* -------------------------------------------------- How it works */}
-      <section id="how-it-works" className="relative px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+      <section
+        id="how-it-works"
+        className="relative px-4 py-20 sm:px-6 lg:px-8 lg:py-28"
+      >
         <div className="mx-auto max-w-7xl">
           <Reveal className="max-w-2xl">
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-violet-300">
@@ -105,8 +131,8 @@ export default function HomePage() {
               Three steps from connected to answering
             </h2>
             <p className="mt-4 text-slate-400">
-              No professional services engagement, no six-month rollout. Most teams are answering
-              real questions inside two weeks.
+              No professional services engagement, no six-month rollout. Most
+              teams are answering real questions inside two weeks.
             </p>
           </Reveal>
 
@@ -117,13 +143,23 @@ export default function HomePage() {
                   <span className="font-mono text-5xl font-semibold text-white/8 transition group-hover:text-violet-500/25">
                     {step.number}
                   </span>
-                  <h3 className="mt-3 text-xl font-semibold text-white">{step.title}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-400">{step.body}</p>
+                  <h3 className="mt-3 text-xl font-semibold text-white">
+                    {step.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-relaxed text-slate-400">
+                    {step.body}
+                  </p>
 
                   <ul className="mt-5 space-y-2 border-t border-white/8 pt-5">
                     {step.detail.map((item) => (
-                      <li key={item} className="flex items-center gap-2 text-sm text-slate-300">
-                        <Check size={13} className="shrink-0 text-electric-400" />
+                      <li
+                        key={item}
+                        className="flex items-center gap-2 text-sm text-slate-300"
+                      >
+                        <Check
+                          size={13}
+                          className="shrink-0 text-electric-400"
+                        />
                         {item}
                       </li>
                     ))}
@@ -144,7 +180,10 @@ export default function HomePage() {
       </section>
 
       {/* ------------------------------------------------------- Features */}
-      <section id="platform" className="relative px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+      <section
+        id="platform"
+        className="relative px-4 py-20 sm:px-6 lg:px-8 lg:py-28"
+      >
         <div className="mx-auto max-w-7xl">
           <Reveal className="max-w-2xl">
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-violet-300">
@@ -154,8 +193,8 @@ export default function HomePage() {
               Built for teams that have to justify the answer
             </h2>
             <p className="mt-4 text-slate-400">
-              Every capability below exists because someone had to explain an AI output to an
-              auditor, a customer or a regulator.
+              Every capability below exists because someone had to explain an AI
+              output to an auditor, a customer or a regulator.
             </p>
           </Reveal>
 
@@ -166,8 +205,12 @@ export default function HomePage() {
                   <span className="grid size-11 place-items-center rounded-2xl bg-gradient-to-br from-electric-500/20 to-violet-600/20 text-electric-300 transition duration-300 group-hover:from-electric-500/35 group-hover:to-violet-600/35 group-hover:text-white group-hover:shadow-glow">
                     <feature.icon size={19} />
                   </span>
-                  <h3 className="mt-4 text-lg font-semibold text-white">{feature.title}</h3>
-                  <p className="mt-2.5 text-sm leading-relaxed text-slate-400">{feature.body}</p>
+                  <h3 className="mt-4 text-lg font-semibold text-white">
+                    {feature.title}
+                  </h3>
+                  <p className="mt-2.5 text-sm leading-relaxed text-slate-400">
+                    {feature.body}
+                  </p>
                 </div>
               </Reveal>
             ))}
@@ -176,7 +219,10 @@ export default function HomePage() {
       </section>
 
       {/* ----------------------------------------------------------- Demo */}
-      <section id="demo" className="relative px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+      <section
+        id="demo"
+        className="relative px-4 py-20 sm:px-6 lg:px-8 lg:py-28"
+      >
         <div className="mx-auto max-w-7xl">
           <div className="ring-gradient overflow-hidden rounded-[2rem] bg-void-900/50 p-6 backdrop-blur sm:p-10 lg:p-14">
             <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr),minmax(0,1.15fr)]">
@@ -188,19 +234,26 @@ export default function HomePage() {
                   Ask a question, check the receipts
                 </h2>
                 <p className="mt-4 leading-relaxed text-slate-400">
-                  Switch between the three threads to see how a grounded answer is assembled. Each
-                  response names the systems it drew from, so the first thing a sceptical colleague
-                  can do is open the source and check.
+                  Switch between the three threads to see how a grounded answer
+                  is assembled. Each response names the systems it drew from, so
+                  the first thing a sceptical colleague can do is open the
+                  source and check.
                 </p>
 
                 <ul className="mt-8 space-y-3">
                   {[
                     "Retrieval runs before generation, never after",
                     "Citations link to the exact record, not the workspace",
-                    "Below the confidence threshold, it declines to answer"
+                    "Below the confidence threshold, it declines to answer",
                   ].map((item) => (
-                    <li key={item} className="flex items-start gap-2.5 text-sm text-slate-300">
-                      <Check size={15} className="mt-0.5 shrink-0 text-electric-400" />
+                    <li
+                      key={item}
+                      className="flex items-start gap-2.5 text-sm text-slate-300"
+                    >
+                      <Check
+                        size={15}
+                        className="mt-0.5 shrink-0 text-electric-400"
+                      />
                       {item}
                     </li>
                   ))}
@@ -211,7 +264,10 @@ export default function HomePage() {
                   className="group mt-9 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-electric-500 to-violet-600 px-6 py-3.5 font-semibold text-white shadow-glow transition duration-300 hover:-translate-y-0.5 hover:shadow-glow-lg"
                 >
                   Start a free trial
-                  <ArrowRight size={16} className="transition group-hover:translate-x-1" />
+                  <ArrowRight
+                    size={16}
+                    className="transition group-hover:translate-x-1"
+                  />
                 </a>
               </Reveal>
 
@@ -224,7 +280,10 @@ export default function HomePage() {
       </section>
 
       {/* -------------------------------------------------------- Pricing */}
-      <section id="pricing" className="relative px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+      <section
+        id="pricing"
+        className="relative px-4 py-20 sm:px-6 lg:px-8 lg:py-28"
+      >
         <div className="mx-auto max-w-7xl">
           <Reveal className="mx-auto max-w-2xl text-center">
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-violet-300">
@@ -234,8 +293,8 @@ export default function HomePage() {
               Priced per workspace, not per question
             </h2>
             <p className="mt-4 text-slate-400">
-              Model inference is included at fair-use levels. No surprise token bills at the end of
-              a busy month.
+              Model inference is included at fair-use levels. No surprise token
+              bills at the end of a busy month.
             </p>
           </Reveal>
 
@@ -247,7 +306,7 @@ export default function HomePage() {
                     "relative flex h-full flex-col rounded-3xl p-7 backdrop-blur transition duration-300 hover:-translate-y-1.5",
                     plan.featured
                       ? "bg-gradient-to-b from-violet-600/20 to-void-900/70 shadow-glow ring-1 ring-violet-400/40"
-                      : "ring-gradient bg-void-900/50"
+                      : "ring-gradient bg-void-900/50",
                   )}
                 >
                   {plan.featured ? (
@@ -256,33 +315,46 @@ export default function HomePage() {
                     </span>
                   ) : null}
 
-                  <h3 className="text-lg font-semibold text-white">{plan.name}</h3>
+                  <h3 className="text-lg font-semibold text-white">
+                    {plan.name}
+                  </h3>
                   <p className="mt-1.5 text-sm text-slate-400">{plan.blurb}</p>
 
                   <div className="mt-6 flex items-baseline gap-2">
-                    <span className="text-4xl font-semibold text-white">{plan.price}</span>
-                    <span className="text-sm text-slate-400">{plan.cadence}</span>
+                    <span className="text-4xl font-semibold text-white">
+                      {plan.price}
+                    </span>
+                    <span className="text-sm text-slate-400">
+                      {plan.cadence}
+                    </span>
                   </div>
 
                   <ul className="mt-7 flex-1 space-y-3 border-t border-white/8 pt-6">
                     {plan.includes.map((item) => (
-                      <li key={item} className="flex items-start gap-2.5 text-sm text-slate-300">
-                        <Check size={14} className="mt-0.5 shrink-0 text-electric-400" />
+                      <li
+                        key={item}
+                        className="flex items-start gap-2.5 text-sm text-slate-300"
+                      >
+                        <Check
+                          size={14}
+                          className="mt-0.5 shrink-0 text-electric-400"
+                        />
                         {item}
                       </li>
                     ))}
                   </ul>
 
-                  <button
+                  <a
+                    href="/workspace"
                     className={cn(
                       "mt-8 w-full rounded-xl px-5 py-3 font-semibold transition duration-300",
                       plan.featured
                         ? "bg-gradient-to-r from-electric-500 to-violet-600 text-white shadow-glow hover:shadow-glow-lg"
-                        : "border border-white/15 bg-white/5 text-slate-100 hover:border-violet-400/50 hover:bg-white/10"
+                        : "border border-white/15 bg-white/5 text-slate-100 hover:border-violet-400/50 hover:bg-white/10",
                     )}
                   >
                     {plan.cta}
-                  </button>
+                  </a>
                 </div>
               </Reveal>
             ))}
@@ -290,15 +362,18 @@ export default function HomePage() {
 
           <Reveal delayMs={200}>
             <p className="mt-8 text-center text-sm text-slate-500">
-              All plans include SOC 2 Type II, zero data retention and a 14-day trial. No card
-              required.
+              Illustrative plan options. This local build does not collect
+              payments or claim compliance certification.
             </p>
           </Reveal>
         </div>
       </section>
 
       {/* ------------------------------------------------------------ FAQ */}
-      <section id="faq" className="relative px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+      <section
+        id="faq"
+        className="relative px-4 py-20 sm:px-6 lg:px-8 lg:py-28"
+      >
         <div className="mx-auto max-w-4xl">
           <Reveal className="text-center">
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-violet-300">
@@ -310,7 +385,7 @@ export default function HomePage() {
           </Reveal>
 
           <div className="mt-12">
-            <FaqList />
+            <FaqList items={faqs} />
           </div>
         </div>
       </section>
@@ -328,21 +403,29 @@ export default function HomePage() {
                 Stop guessing what your data says
               </h2>
               <p className="mx-auto mt-4 max-w-xl text-slate-300">
-                Connect one source, write ten questions, and see whether the answers hold up. That
-                is the whole trial.
+                Connect one source, write ten questions, and see whether the
+                answers hold up. That is the whole trial.
               </p>
               <div className="mt-9 flex flex-wrap justify-center gap-3">
-                <button className="group inline-flex items-center gap-2 rounded-xl bg-white px-7 py-3.5 font-semibold text-void-950 transition duration-300 hover:-translate-y-0.5 hover:bg-slate-100">
-                  Start free trial
-                  <ArrowRight size={16} className="transition group-hover:translate-x-1" />
-                </button>
-                <button className="rounded-xl border border-white/20 bg-white/5 px-7 py-3.5 font-semibold text-white backdrop-blur transition duration-300 hover:-translate-y-0.5 hover:bg-white/10">
-                  Talk to an engineer
-                </button>
+                <a
+                  href="/workspace"
+                  className="inline-flex items-center gap-2 rounded-xl bg-white px-7 py-3.5 font-semibold text-void-950"
+                >
+                  Open workspace <ArrowRight size={16} />
+                </a>
+                <a
+                  href="#contact"
+                  className="rounded-xl border border-white/20 bg-white/5 px-7 py-3.5 font-semibold text-white"
+                >
+                  Talk to the team
+                </a>
               </div>
             </div>
           </div>
         </Reveal>
+      </section>
+      <section id="contact" className="px-4 py-16">
+        <ContactRequest />
       </section>
     </>
   );

@@ -10,7 +10,7 @@ const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono", displ
 export const metadata: Metadata = {
   title: "Nucleus — Put your company's knowledge to work",
   description:
-    "Nucleus connects to the systems your team already runs on and answers operational questions with citations you can check."
+    "Nucleus is a private text-document workspace with account-scoped keyword search, referenced source passages and reviewed content publishing."
 };
 
 export const viewport: Viewport = {

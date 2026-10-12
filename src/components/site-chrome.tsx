@@ -10,7 +10,7 @@ const navLinks = [
   { href: "#how-it-works", label: "How it works" },
   { href: "#demo", label: "Demo" },
   { href: "#pricing", label: "Pricing" },
-  { href: "#faq", label: "FAQ" }
+  { href: "#faq", label: "FAQ" },
 ];
 
 export function SiteHeader() {
@@ -28,7 +28,9 @@ export function SiteHeader() {
     <header
       className={cn(
         "sticky top-0 z-50 transition duration-300",
-        scrolled ? "border-b border-white/8 bg-void-950/80 backdrop-blur-xl" : "bg-transparent"
+        scrolled
+          ? "border-b border-white/8 bg-void-950/80 backdrop-blur-xl"
+          : "bg-transparent",
       )}
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center gap-4 px-4 sm:px-6 lg:px-8">
@@ -36,7 +38,9 @@ export function SiteHeader() {
           <span className="grid size-9 place-items-center rounded-xl bg-gradient-to-br from-electric-500 to-violet-600 text-white shadow-glow">
             <Hexagon size={17} />
           </span>
-          <span className="text-lg font-semibold tracking-tight text-white">{brand.name}</span>
+          <span className="text-lg font-semibold tracking-tight text-white">
+            {brand.name}
+          </span>
         </a>
 
         <nav className="ml-6 hidden items-center gap-1 lg:flex">
@@ -53,17 +57,20 @@ export function SiteHeader() {
 
         <div className="ml-auto flex items-center gap-2">
           <a
-            href="#pricing"
+            href="/workspace"
             className="hidden rounded-xl px-4 py-2 text-sm font-medium text-slate-300 transition hover:text-white sm:block"
           >
             Sign in
           </a>
           <a
-            href="#demo"
+            href="/workspace"
             className="group hidden items-center gap-1.5 rounded-xl bg-gradient-to-r from-electric-500 to-violet-600 px-4 py-2 text-sm font-semibold text-white shadow-glow transition duration-300 hover:shadow-glow-lg sm:inline-flex"
           >
-            Book a demo
-            <ArrowRight size={14} className="transition group-hover:translate-x-0.5" />
+            Open workspace
+            <ArrowRight
+              size={14}
+              className="transition group-hover:translate-x-0.5"
+            />
           </a>
 
           <button
@@ -112,9 +119,13 @@ export function SiteFooter() {
               <span className="grid size-9 place-items-center rounded-xl bg-gradient-to-br from-electric-500 to-violet-600 text-white">
                 <Hexagon size={17} />
               </span>
-              <span className="text-lg font-semibold text-white">{brand.name}</span>
+              <span className="text-lg font-semibold text-white">
+                {brand.name}
+              </span>
             </div>
-            <p className="mt-4 max-w-sm text-sm leading-relaxed text-slate-400">{brand.mission}</p>
+            <p className="mt-4 max-w-sm text-sm leading-relaxed text-slate-400">
+              {brand.mission}
+            </p>
 
             <div className="mt-6 flex gap-2">
               {[Github, Twitter].map((Icon, index) => (
@@ -148,7 +159,7 @@ export function SiteFooter() {
 
         <div className="mt-12 flex flex-col gap-3 border-t border-white/8 pt-6 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
           <p>© 2026 Nucleus Labs. A portfolio project — not a real company.</p>
-          <p>SOC 2 Type II · GDPR · Zero data retention</p>
+          <p>Private documents · Source references · Reviewed publishing</p>
         </div>
       </div>
     </footer>

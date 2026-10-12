@@ -1,5 +1,8 @@
 # Nucleus — AI Company Landing Page
 
+> **Application upgrade — October 2026:** This repository now includes a persistent Node application API and an authenticated operations workspace at `/workspace`. Run `npm run admin:bootstrap` once, then follow [the application runbook](docs/FULLSTACK.md). CMS collections use reviewed draft/published snapshots; financial applications use protected operational records. Existing public deployments have not been changed. Older frontend descriptions below document the original interface and sample data.
+
+
 A landing page for a fictional AI product: an operational-knowledge platform
 that answers questions from a company's own systems with citations you can
 check. Dark, gradient-driven and deliberately original — no real company's

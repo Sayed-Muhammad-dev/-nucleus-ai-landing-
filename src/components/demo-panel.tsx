@@ -16,7 +16,9 @@ const TYPE_INTERVAL_MS = 12;
 export function DemoPanel() {
   const [threadIndex, setThreadIndex] = useState(0);
   const [typed, setTyped] = useState("");
-  const [phase, setPhase] = useState<"idle" | "thinking" | "typing" | "done">("idle");
+  const [phase, setPhase] = useState<"idle" | "thinking" | "typing" | "done">(
+    "idle",
+  );
   const timers = useRef<number[]>([]);
 
   const thread = demoThreads[threadIndex];
@@ -58,7 +60,7 @@ export function DemoPanel() {
           }
         };
         step();
-      }, 900)
+      }, 900),
     );
   }
 
@@ -78,7 +80,9 @@ export function DemoPanel() {
           <span className="size-2.5 rounded-full bg-amber-400/70" />
           <span className="size-2.5 rounded-full bg-emerald-400/70" />
         </div>
-        <p className="ml-1 font-mono text-xs text-slate-400">nucleus / workspace</p>
+        <p className="ml-1 font-mono text-xs text-slate-400">
+          nucleus / illustrative example
+        </p>
         <button
           onClick={run}
           className="ml-auto inline-flex items-center gap-1.5 rounded-lg px-2 py-1 text-xs text-slate-400 transition hover:bg-white/5 hover:text-slate-200"
@@ -98,7 +102,7 @@ export function DemoPanel() {
               "rounded-lg px-3 py-1.5 text-xs font-medium transition",
               index === threadIndex
                 ? "bg-violet-500/20 text-violet-200 shadow-glow"
-                : "text-slate-400 hover:bg-white/5 hover:text-slate-200"
+                : "text-slate-400 hover:bg-white/5 hover:text-slate-200",
             )}
           >
             {item.label}
@@ -126,7 +130,7 @@ export function DemoPanel() {
             {phase === "thinking" ? (
               <div className="space-y-2 py-1">
                 <p className="font-mono text-xs text-violet-300">
-                  searching 41 sources…
+                  playing an example conversation…
                 </p>
                 <div className="h-2 w-2/3 animate-pulse rounded-full bg-white/10" />
                 <div className="h-2 w-1/2 animate-pulse rounded-full bg-white/10" />
@@ -151,7 +155,10 @@ export function DemoPanel() {
                           key={citation.label}
                           className="inline-flex items-center gap-1.5 rounded-lg border border-white/10 bg-white/5 px-2.5 py-1.5 text-[11px] text-slate-300 transition hover:border-violet-400/40 hover:bg-violet-500/10"
                         >
-                          <FileText size={11} className="shrink-0 text-violet-300" />
+                          <FileText
+                            size={11}
+                            className="shrink-0 text-violet-300"
+                          />
                           {citation.label}
                         </span>
                       ))}
@@ -164,6 +171,12 @@ export function DemoPanel() {
         </div>
       </div>
 
+      <p className="px-4 py-3 text-xs text-slate-400">
+        Illustrative conversation.{" "}
+        <a className="text-violet-200 underline" href="/workspace">
+          Search your own documents in the workspace →
+        </a>
+      </p>
       {/* Composer */}
       <div className="flex items-center gap-2 border-t border-white/5 px-4 py-3">
         <div className="flex-1 rounded-xl border border-white/10 bg-void-800/60 px-3.5 py-2.5 text-sm text-slate-500">

@@ -1,0 +1,83 @@
+{
+  "plans": [
+    {
+      "name": "Team",
+      "price": "$490",
+      "cadence": "per month",
+      "blurb": "For a single team putting one workflow into production.",
+      "cta": "Start free trial",
+      "includes": [
+        "Up to 25 seats",
+        "5 connectors",
+        "250k indexed documents",
+        "Shared evaluation suite",
+        "Email support, next business day"
+      ]
+    },
+    {
+      "name": "Scale",
+      "price": "$2,400",
+      "cadence": "per month",
+      "blurb": "For platform teams running several workflows across departments.",
+      "featured": true,
+      "cta": "Start free trial",
+      "includes": [
+        "Up to 250 seats",
+        "All 41 connectors",
+        "5M indexed documents",
+        "Per-workflow model routing",
+        "SSO, SCIM and audit export",
+        "Shared Slack channel"
+      ]
+    },
+    {
+      "name": "Enterprise",
+      "price": "Custom",
+      "cadence": "annual",
+      "blurb": "For regulated organisations that need deployment in their own cloud.",
+      "cta": "Talk to sales",
+      "includes": [
+        "Unlimited seats",
+        "VPC or on-premise deployment",
+        "Custom connectors",
+        "Dedicated evaluation engineering",
+        "99.9% uptime SLA",
+        "Named support engineer"
+      ]
+    }
+  ],
+  "faqs": [
+    {
+      "question": "How does knowledge search work?",
+      "answer": "Add text documents or notes to your signed-in workspace. Search ranks matching passages and returns their document titles and passage numbers. Results are source excerpts rather than generated answers."
+    },
+    {
+      "question": "Are my documents visible to other members?",
+      "answer": "Member search is limited to documents owned by the signed-in account. Owner-controlled staff permissions are enforced by the server."
+    },
+    {
+      "question": "Does this build call an AI model?",
+      "answer": "No. Source retrieval works without external model keys. A model integration and its privacy and usage policy must be configured separately."
+    },
+    {
+      "question": "How do we update public content?",
+      "answer": "Editors save drafts in the CMS. The owner reviews the published and draft versions side by side and publishes approved changes."
+    },
+    {
+      "question": "What do we need for deployment?",
+      "answer": "Use a separate persistent database and create an owner account. Local file storage is intended for development or a persistent Node host, not a writable Vercel deployment."
+    }
+  ],
+  "brand": [
+    {
+      "name": "Nucleus",
+      "product": "Nucleus Reason",
+      "tagline": "Put your company's knowledge to work",
+      "subline": "A private knowledge workspace for storing documents, searching their text and checking the matching source passages.",
+      "mission": "Ship AI that operations teams can audit, not a black box they have to trust."
+    }
+  ],
+  "documents": [],
+  "inquiries": [],
+  "subscribers": []
+}

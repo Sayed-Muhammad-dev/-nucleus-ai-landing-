@@ -9,7 +9,7 @@ import {
   ShieldCheck,
   Sparkles,
   Workflow,
-  type LucideIcon
+  type LucideIcon,
 } from "lucide-react";
 
 export const brand = {
@@ -19,7 +19,7 @@ export const brand = {
   subline:
     "Nucleus connects to the systems your team already runs on, reads what lives inside them, and answers operational questions with citations you can check.",
   mission:
-    "Ship AI that operations teams can audit, not a black box they have to trust."
+    "Ship AI that operations teams can audit, not a black box they have to trust.",
 };
 
 export interface Feature {
@@ -32,48 +32,48 @@ export const features: Feature[] = [
   {
     icon: FileSearch,
     title: "Grounded retrieval",
-    body: "Every answer cites the document, ticket or row it came from. No citation, no answer — the model returns 'not found' instead of guessing."
+    body: "Search returns matching passages with document titles and passage numbers. No matching source means no result.",
   },
   {
     icon: Plug,
-    title: "Forty-one connectors",
-    body: "Postgres, Snowflake, S3, Confluence, Jira, Zendesk, Salesforce, Notion, Slack and Google Drive, syncing on a schedule you set."
+    title: "Private document library",
+    body: "Store policy text and notes in your workspace. External source connectors are a future integration, not enabled in this build.",
   },
   {
     icon: ShieldCheck,
     title: "Permissions carry through",
-    body: "Nucleus inherits source-system access. If a person cannot open the document, retrieval will not surface it to them either."
+    body: "Document search is scoped to your signed-in account. Staff access and publishing permissions are checked on the server.",
   },
   {
     icon: Workflow,
-    title: "Multi-step workflows",
-    body: "Chain retrieval, transformation and approval into repeatable runs. Every step is logged with its inputs and outputs."
+    title: "Content review workflow",
+    body: "Editors save CMS drafts; owners compare before and after, publish reviewed changes and inspect the audit trail.",
   },
   {
     icon: LineChart,
-    title: "Evaluation built in",
-    body: "Score every change against your own labelled set before it ships. Regressions block the deploy rather than reaching users."
+    title: "Traceable source results",
+    body: "A search result preserves its document reference and passage number so you can inspect the original text.",
   },
   {
     icon: Lock,
     title: "Your data stays yours",
-    body: "Deploy in your VPC or ours. Nothing is used for model training, and retention is configurable down to zero."
+    body: "The application does not transmit document content to an external language model. Use a separate persistent database for deployment.",
   },
   {
     icon: Database,
-    title: "Structured and unstructured",
-    body: "Query a warehouse table and a PDF in the same question, and get one answer that reconciles both."
+    title: "Documents and notes",
+    body: "Add text documents and notes, then retrieve excerpts by keywords. PDF parsing and warehouse connectors are not included.",
   },
   {
     icon: GitBranch,
-    title: "Versioned prompts",
-    body: "Prompts, tools and retrieval configs are versioned artefacts with diffs, review and one-click rollback."
+    title: "Versioned content",
+    body: "Saved records use versions to prevent one editor from silently overwriting another editor’s changes.",
   },
   {
     icon: Boxes,
-    title: "Model agnostic",
-    body: "Route per workload across frontier and open models. Swap providers without rewriting a single workflow."
-  }
+    title: "Provider boundary",
+    body: "Source retrieval works without a paid model key. External model generation can be integrated separately when required.",
+  },
 ];
 
 export interface Step {
@@ -88,20 +88,32 @@ export const steps: Step[] = [
     number: "01",
     title: "Connect your sources",
     body: "Point Nucleus at the systems your team already uses. Indexing is incremental, so the first sync is the only slow one.",
-    detail: ["OAuth or service account", "Scheduled or webhook sync", "Row and field level scoping"]
+    detail: [
+      "OAuth or service account",
+      "Scheduled or webhook sync",
+      "Row and field level scoping",
+    ],
   },
   {
     number: "02",
     title: "Define what good looks like",
     body: "Write the questions your team actually asks, with the answers you expect. That set becomes the regression suite for every future change.",
-    detail: ["Labelled evaluation set", "Custom scoring rubrics", "Blocking thresholds in CI"]
+    detail: [
+      "Labelled evaluation set",
+      "Custom scoring rubrics",
+      "Blocking thresholds in CI",
+    ],
   },
   {
     number: "03",
     title: "Ship and watch",
     body: "Deploy to Slack, the API or the web app. Every answer is traced end to end, so a wrong result is a debugging task, not a mystery.",
-    detail: ["Full retrieval traces", "Per-answer cost and latency", "Feedback loops into evals"]
-  }
+    detail: [
+      "Full retrieval traces",
+      "Per-answer cost and latency",
+      "Feedback loops into evals",
+    ],
+  },
 ];
 
 export interface Plan {
@@ -126,8 +138,8 @@ export const plans: Plan[] = [
       "5 connectors",
       "250k indexed documents",
       "Shared evaluation suite",
-      "Email support, next business day"
-    ]
+      "Email support, next business day",
+    ],
   },
   {
     name: "Scale",
@@ -142,14 +154,15 @@ export const plans: Plan[] = [
       "5M indexed documents",
       "Per-workflow model routing",
       "SSO, SCIM and audit export",
-      "Shared Slack channel"
-    ]
+      "Shared Slack channel",
+    ],
   },
   {
     name: "Enterprise",
     price: "Custom",
     cadence: "annual",
-    blurb: "For regulated organisations that need deployment in their own cloud.",
+    blurb:
+      "For regulated organisations that need deployment in their own cloud.",
     cta: "Talk to sales",
     includes: [
       "Unlimited seats",
@@ -157,9 +170,9 @@ export const plans: Plan[] = [
       "Custom connectors",
       "Dedicated evaluation engineering",
       "99.9% uptime SLA",
-      "Named support engineer"
-    ]
-  }
+      "Named support engineer",
+    ],
+  },
 ];
 
 export interface Faq {
@@ -171,33 +184,33 @@ export const faqs: Faq[] = [
   {
     question: "How do you stop the model making things up?",
     answer:
-      "Answers are generated only from retrieved passages, and every claim carries a citation back to its source. When retrieval returns nothing above the confidence threshold, Nucleus says it could not find an answer rather than producing one. You can tune that threshold per workflow."
+      "Answers are generated only from retrieved passages, and every claim carries a citation back to its source. When retrieval returns nothing above the confidence threshold, Nucleus says it could not find an answer rather than producing one. You can tune that threshold per workflow.",
   },
   {
     question: "Does Nucleus train on our data?",
     answer:
-      "No. Your content is used for retrieval at query time and nothing else. It is never added to a training corpus, ours or a provider's, and zero-retention endpoints are used with every model vendor we route to."
+      "No. Your content is used for retrieval at query time and nothing else. It is never added to a training corpus, ours or a provider's, and zero-retention endpoints are used with every model vendor we route to.",
   },
   {
     question: "What happens to permissions?",
     answer:
-      "Nucleus reads access control lists from each connected system and applies them at query time. If someone loses access to a Confluence space on Monday, Nucleus stops surfacing it to them on Monday, without a re-index."
+      "Nucleus reads access control lists from each connected system and applies them at query time. If someone loses access to a Confluence space on Monday, Nucleus stops surfacing it to them on Monday, without a re-index.",
   },
   {
     question: "Can we run it in our own cloud?",
     answer:
-      "Yes, on the Enterprise plan. Nucleus deploys into your AWS, GCP or Azure account as a set of containers, with the control plane either self-hosted or connected over a private link. Nothing egresses to us."
+      "Yes, on the Enterprise plan. Nucleus deploys into your AWS, GCP or Azure account as a set of containers, with the control plane either self-hosted or connected over a private link. Nothing egresses to us.",
   },
   {
     question: "Which models can we use?",
     answer:
-      "Routing is per workload across frontier providers and open-weight models you host yourself. Because prompts and tools are versioned artefacts, swapping a model is a config change measured against your evaluation set, not a rewrite."
+      "Routing is per workload across frontier providers and open-weight models you host yourself. Because prompts and tools are versioned artefacts, swapping a model is a config change measured against your evaluation set, not a rewrite.",
   },
   {
     question: "How long does the first deployment take?",
     answer:
-      "Teams typically have their first workflow answering real questions within two weeks: a few days to connect sources and index, then most of the remaining time building the evaluation set that tells you whether it is good enough to ship."
-  }
+      "Teams typically have their first workflow answering real questions within two weeks: a few days to connect sources and index, then most of the remaining time building the evaluation set that tells you whether it is good enough to ship.",
+  },
 ];
 
 export const logos = [
@@ -208,14 +221,14 @@ export const logos = [
   "ORBITAL",
   "FIELDNOTE",
   "SUNDERLAND",
-  "ATLAS FREIGHT"
+  "ATLAS FREIGHT",
 ];
 
 export const stats = [
-  { value: "41", label: "Data connectors" },
-  { value: "98.2%", label: "Citation accuracy" },
-  { value: "<900ms", label: "Median response" },
-  { value: "SOC 2", label: "Type II certified" }
+  { value: "Private", label: "Account-scoped documents" },
+  { value: "Sources", label: "Referenced passages" },
+  { value: "Text", label: "Keyword retrieval" },
+  { value: "CMS", label: "Reviewed publishing" },
 ];
 
 /** Scripted exchange for the interactive demo panel. */
@@ -225,14 +238,18 @@ export interface DemoMessage {
   citations?: Array<{ label: string; source: string }>;
 }
 
-export const demoThreads: Array<{ id: string; label: string; messages: DemoMessage[] }> = [
+export const demoThreads: Array<{
+  id: string;
+  label: string;
+  messages: DemoMessage[];
+}> = [
   {
     id: "renewals",
     label: "Renewals",
     messages: [
       {
         role: "user",
-        text: "Which enterprise accounts renew in Q4 and have an open severity-1 ticket?"
+        text: "Which enterprise accounts renew in Q4 and have an open severity-1 ticket?",
       },
       {
         role: "assistant",
@@ -240,10 +257,10 @@ export const demoThreads: Array<{ id: string; label: string; messages: DemoMessa
         citations: [
           { label: "Salesforce · Renewal pipeline Q4", source: "salesforce" },
           { label: "Zendesk · Open S1 queue", source: "zendesk" },
-          { label: "Confluence · Support SLA policy", source: "confluence" }
-        ]
-      }
-    ]
+          { label: "Confluence · Support SLA policy", source: "confluence" },
+        ],
+      },
+    ],
   },
   {
     id: "finance",
@@ -251,17 +268,17 @@ export const demoThreads: Array<{ id: string; label: string; messages: DemoMessa
     messages: [
       {
         role: "user",
-        text: "What drove the 18% jump in infrastructure spend last month?"
+        text: "What drove the 18% jump in infrastructure spend last month?",
       },
       {
         role: "assistant",
         text: "Almost all of it is one line: the vector index was resharded on 8 June, taking storage from 12 TB to 27 TB. That accounts for $41.2k of the $47.8k increase.\n\nThe remainder is egress from the new EU region, which started billing mid-month and will be roughly double next month at full utilisation.",
         citations: [
           { label: "Snowflake · cloud_costs_daily", source: "snowflake" },
-          { label: "Jira · INFRA-2841 reshard", source: "jira" }
-        ]
-      }
-    ]
+          { label: "Jira · INFRA-2841 reshard", source: "jira" },
+        ],
+      },
+    ],
   },
   {
     id: "product",
@@ -269,31 +286,31 @@ export const demoThreads: Array<{ id: string; label: string; messages: DemoMessa
     messages: [
       {
         role: "user",
-        text: "Summarise what customers said about the new onboarding flow."
+        text: "Summarise what customers said about the new onboarding flow.",
       },
       {
         role: "assistant",
         text: "Across 214 pieces of feedback since launch, sentiment is positive on speed and negative on the SSO step.\n\nThe recurring complaint — 63 mentions — is that the SSO configuration screen does not explain which IdP metadata field to paste, so admins paste the entity ID instead of the metadata URL and the step fails silently.",
         citations: [
           { label: "Zendesk · Onboarding tag, 90 days", source: "zendesk" },
-          { label: "Notion · Launch feedback log", source: "notion" }
-        ]
-      }
-    ]
-  }
+          { label: "Notion · Launch feedback log", source: "notion" },
+        ],
+      },
+    ],
+  },
 ];
 
 export const footerColumns = [
   {
     title: "Product",
-    links: ["Platform", "Connectors", "Evaluations", "Security", "Changelog"]
+    links: ["Platform", "Connectors", "Evaluations", "Security", "Changelog"],
   },
   {
     title: "Developers",
-    links: ["Documentation", "API reference", "SDKs", "Status", "Open source"]
+    links: ["Documentation", "API reference", "SDKs", "Status", "Open source"],
   },
   {
     title: "Company",
-    links: ["About", "Careers", "Customers", "Blog", "Contact"]
-  }
+    links: ["About", "Careers", "Customers", "Blog", "Contact"],
+  },
 ];
